@@ -27,7 +27,7 @@ If you use any source code included in this toolkit in your work, please cite th
 ```
 @inproceedings{gu2021dialogbert,
       title={Dialog{BERT}: Discourse-Aware Response Generation via Learning to Recover and Rank Utterances},
-      author={Gu, Xiaodong and Ha, Jung-Woo},
+      author={Gu, Xiaodong and Kang, Min Yoo and Ha, Jung-Woo},
       journal={In Proceedings of the 35th AAAI Conference on Artificial Intelligence (AAAI 2021)},
       year={2021}
 }
