@@ -34,6 +34,9 @@ def main():
     parser.add_argument("--model_size", default="tiny", type=str, help="tiny, small, base, large")
     parser.add_argument("--language", default="english", type=str, help= "language, english or chinese")
 
+    parser.add_argument('--do_test', action='store_true', help="whether test or train")
+    parser.add_argument("--reload_from", default=-1, type=int, help="The global iteration of optimal checkpoint.")
+    
     parser.add_argument("--per_gpu_train_batch_size", default=32, type=int, help="Batch size per GPU/CPU for training.")
     parser.add_argument("--per_gpu_eval_batch_size", default=1, type=int, help="Batch size per GPU/CPU for evaluation.")
     parser.add_argument('--grad_accum_steps', type=int, default=2,
@@ -98,13 +101,14 @@ def main():
     logger.info("Training/evaluation parameters %s", args)
 
     # Training
-    global_step, tr_loss = solver.train(args)
-    logger.info(" global_step = %s, average loss = %s", global_step, tr_loss)
-
+    if not args.do_test:
+        global_step, tr_loss = solver.train(args)
+        logger.info(" global_step = %s, average loss = %s", global_step, tr_loss)
+    else:
     # Evaluation
-    if args.local_rank in [-1, 0]:
-        results = solver.evaluate(args)
-        print(results)
+        if args.local_rank in [-1, 0]:
+            results = solver.evaluate(args)
+            print(results)
         
 
 if __name__ == "__main__":

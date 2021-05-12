@@ -50,7 +50,8 @@ class DialogBERTSolver(object):
         
     def load(self, args):
         # Load a trained model and vocabulary that you have fine-tuned
-        output_dir = os.path.join(f"./output/{args.model}/{args.experiment_name}/models/", 'optimal') 
+        assert args.reload_from<=0, "please specify the checkpoint iteration in args.reload_from" 
+        output_dir = os.path.join(f"./output/{args.model}/{args.model_size}/models/", f'checkpoint-{args.reload_from}') 
         self.model = DialogBERT.from_pretrained(output_dir)
         self.model.to(args.device)
         
@@ -75,6 +76,7 @@ class DialogBERTSolver(object):
         return global_step, tr_loss
     
     def evaluate(self, args):
+        self.load(args)
         test_set = HBertMseEuopDataset(os.path.join(args.data_path, 'test.h5'), self.model.tokenizer)
         result, generated_text = Learner().run_eval(args, self.model, test_set)
         eval_output_dir = f"./output/{args.model}/{args.experiment_name}/"

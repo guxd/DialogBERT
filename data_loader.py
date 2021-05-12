@@ -39,7 +39,6 @@ class DialogTransformerDataset(data.Dataset):
         self.cache = [[tokenizer.mask_token_id]*max_utt_len]*max_num_utts, [tokenizer.mask_token_id]*max_utt_len
         
         self.perm_list = [list(itertools.permutations(range(L))) for L in range(1, max_num_utts+1)]
-        print(self.perm_list[:5])
         print("loading data...")
         table = tables.open_file(file_path)
         self.contexts = table.get_node('/sentences')[:].astype(np.long)

@@ -1,0 +1,6 @@
+*.swp
+cache/*
+output/*
+__pycache__/*
+models/__pycache__/*
+venv/*

@@ -170,6 +170,7 @@ class DialogBERT(nn.Module):
         self.context_mlm_trans.load_state_dict(torch.load(path.join(model_dir, 'context_mlm_trans.pkl')))
         self.context_order_trans = SelfSorting(self.encoder_config.hidden_size)
         self.context_order_trans.load_state_dict(torch.load(path.join(model_dir, 'context_order_trans.pkl')))
+        self.decoder_config = BertConfig.from_pretrained(model_dir)
         self.decoder = BertLMHeadModel.from_pretrained(path.join(model_dir, 'decoder'))
            
     def save_pretrained(self, output_dir):   
