@@ -15,12 +15,17 @@ Install packages of the _requirements.txt_ file.
 
 # Usage
 
-- Run model by
+- Train model by
   ```
     python main.py
   ```
 The logs and temporary results will be printed to stdout and saved in the `./output` path.
 
+- Run test by 
+  ```
+  python main.py --do_test --reload_from XXXXX
+  ```
+  where XXXXX specifies the iteration number of the optimal checkpoint.
 
 ## References 
 If you use any source code included in this toolkit in your work, please cite the following paper:
